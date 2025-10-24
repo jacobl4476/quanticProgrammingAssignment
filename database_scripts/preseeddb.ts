@@ -37,10 +37,8 @@ created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 /* bcrypt hash for 'Password1!' */
 INSERT INTO users (email,password_hash,role) VALUES
-('alice@corp.com','$2b$10$LRb6Sk4mJqqljoNV2KqB7el8R/Q9ZLf9rObmhZEC4sSL
-aS4L4JFfG','manager'),
-('bob@corp.com','$2b$10$LRb6Sk4mJqqljoNV2KqB7el8R/Q9ZLf9rObmhZEC4sSLaS
-4L4JFfG','rep');
+('alice@corp.com','$2b$10$YvQtSbN2UiKNnyW7LwRIfuaNT0uOh4NoRZsnyp2Q2yBmZtjo/9hAq','manager'),
+('bob@corp.com','$2b$10$YvQtSbN2UiKNnyW7LwRIfuaNT0uOh4NoRZsnyp2Q2yBmZtjo/9hAq','rep');
 INSERT INTO leads (owner_id,name,company,status) VALUES
 ('2','Charlie','Acme Inc','working');
 INSERT INTO accounts (owner_id,name,industry) VALUES
