@@ -4,6 +4,23 @@ const db = new Database('database.db')
 
 @Injectable()
 export class LeadsService {
+  convert(industry: string, req: any): string{
+    if(req.user.role !== "manager"){
+        return "Only managers can perform this operation"
+    }
+    const id = (req.path.split('/')[2])
+    const select = db.prepare('SELECT * FROM leads WHERE owner_id = ? AND id = ?');
+    const rows = select.all(req.user.id.toString(), id);
+    const insert = db.prepare(`
+        INSERT INTO accounts (owner_id, name, industry) VALUES (?, ?, ?)
+        `)
+    insert.run(req.user.id.toString(), rows[0].company, industry)
+    const remove = db.prepare(`
+        DELETE FROM leads WHERE id = ? AND owner_id = ?
+        `)
+    remove.run(parseInt(id), req.user.id.toString())
+    return "Success"
+  }
   create(name: string, company: string, status: string, req: any): string {
     if(req.user.role !== "manager"){
         return "Only managers can perform this operation"

@@ -20,6 +20,13 @@ export class LeadsController {
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
+  @Post("/*id/convert")
+  convert(@Request() req, @Body(new ValidationPipe()) leadDto: {industry: string},) {
+    return this.leadsService.convert(leadDto.industry, req);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
   @Post()
   create(@Request() req, @Body(new ValidationPipe()) leadDto: {name: string, company: string, status: string},) {
     return this.leadsService.create(leadDto.name, leadDto.company, leadDto.status, req);
